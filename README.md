@@ -7,6 +7,24 @@ This repository contains a Python script and a bash script to automate the proce
 - `auto_slots.py`: A Python script that uses the requests library to interact with the 42 Intra platform's API to book slots.
 - `run.sh`: A bash script that sets up a virtual environment, installs the necessary dependencies, and runs the Python script.
 
+## how to get your _intra_42_session_production
+
+go to the your intra home page, right click and click inspect element
+
+![step 1](./usage/1.png)
+
+then search for application in the heading bar and click it
+
+![step 2](./usage/2.png)
+
+after that in storage -> cookies click on "https://profile.intra.42.fr/"
+
+![step 3](./usage/3.png)
+
+finaly you'll find your `_intra_42_session_production` copy it and run the script with it
+
+![step 4](./usage/4.png)
+
 ## Usage
 
 The bash script automates the process of setting up a virtual environment, installing the necessary dependencies, and running the Python script.
