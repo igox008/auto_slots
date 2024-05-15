@@ -2,8 +2,6 @@ import requests
 from urllib.parse import unquote
 from datetime import datetime, timedelta
 import time
-import random
-import string
 
 url = 'https://profile.intra.42.fr/slots.json'
 
