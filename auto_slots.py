@@ -2,9 +2,16 @@ import requests
 from urllib.parse import unquote
 from datetime import datetime, timedelta
 import time
+import random
+import string
 
 url = 'https://profile.intra.42.fr/slots.json'
 
+if len(sys.argv) != 2:
+    print("Usage: python script.py <session_cookie>")
+    sys.exit(1)
+
+session_cookie = sys.argv[1]
 headers = {
     'Accept': 'application/json, text/javascript, */*; q=0.01',
     'Accept-Encoding': 'gzip, deflate, br, zstd',
@@ -25,43 +32,27 @@ headers = {
 }
 
 cookies = {
-    '_ga': 'GA1.1.416685602.1715074746',
-    'cf_clearance': 'BzQn.PhtNZjn4qmJzw0jIovm1fmojC5y6eaG6qSEpeA-1715147091-1.0.1.1-Se5dvgqHac.s0AP4w7D2mlvJIfvY6ihRQfUqYva2WTaCfZLPTu5FXXJcCZ5LdcKNhfGgQI7QWuhwbZxDarYU2w',
-    'user.id': 'MTY2Mjk2--eddf26d2061f8f3fe1dc43f7477e2c1dfd921a22',
-    '_intra_42_session_production': '2286df65d4ef69fd9e61f57004fc9baa',
-    'locale': 'en',
-    'intra': 'v2',
-    'cf_clearance': 'x0q1XKzyL.3yZ3Udlvlp.G28_BhxRMUdiKrrnm9rjEc-1715725819-1.0.1.1-RTunNozbr5qbnGoZ5J_6LysGZIuWWIDHEIOLCt4.0N.qb7qYCw8zRTZ7XQbsFZ0L8j.P5HbkUM2EcJ5yqRcLOw',
-    '_ga_BJ34XNRJCV': 'GS1.1.1715725818.63.1.1715727577.0.0.0'
+    '_intra_42_session_production': session_cookie,
 }
 
-# set begin_at to the current date and time
 begin_at = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
 
-# loop forever
 while True:
-    # set end_at to be equal to begin_at plus 1 hour and 15 minutes
     end_at = (datetime.strptime(begin_at, '%Y-%m-%dT%H:%M:%S') + timedelta(hours=1, minutes=15)).strftime('%Y-%m-%dT%H:%M:%S')
-
-    # update the data dictionary with the new times
     data = {
         'slot[begin_at]': begin_at,
         'slot[end_at]': end_at,
         '_': int(time.time())
     }
 
-    # send the POST request
     response = requests.post(url, headers=headers, cookies=cookies, data=data)
 
-    # check if the response contains the error message
     if 'Ending must be before' in response.json()['message']:
         print('Stopping script...')
         break
 
-    # print the message in the specified format
     message = response.json()['message']
     print(f"from '{begin_at}' to '{end_at}': {message}")
 
-    # set begin_at to be equal to the last end_at plus 15 minutes
     begin_at = (datetime.strptime(end_at, '%Y-%m-%dT%H:%M:%S') + timedelta(minutes=15)).strftime('%Y-%m-%dT%H:%M:%S')
 
