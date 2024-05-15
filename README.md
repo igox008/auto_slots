@@ -9,18 +9,6 @@ This repository contains a Python script and a bash script to automate the proce
 
 ## Usage
 
-### Python Script
-
-To use the Python script, you need to provide your 42 Intra session cookie as a command-line argument.
-
-```bash
-python auto_slots.py <your _intra_42_session_production>
-```
-
-The script will then start booking slots, starting from the current time and continuing until it encounters an error or is stopped.
-
-### Bash Script
-
 The bash script automates the process of setting up a virtual environment, installing the necessary dependencies, and running the Python script.
 
 To use the bash script, you need to provide your 42 Intra session cookie as a command-line argument.
