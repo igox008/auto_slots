@@ -2,6 +2,7 @@ import requests
 from urllib.parse import unquote
 from datetime import datetime, timedelta
 import time
+import sys
 
 url = 'https://profile.intra.42.fr/slots.json'
 
@@ -25,7 +26,7 @@ headers = {
     'Sec-Fetch-Mode': 'cors',
     'Sec-Fetch-Site': 'same-origin',
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-    'X-Csrf-Token': '/+ohZKq38rMtlDmXcffm6w6bLjUJrLMCs+z1pXx87TIjGPYgGJnLJ43wVl/WvropI6fhlaT+KkitAM8xh20FnQ==',
+    'X-Csrf-Token': 'pB36Eg7YAnJODs6G6WX8EdsICbrKyWjb8DE7G3cu0zPKKhHDLbQ31I7UVm2GEkyYRWpzhbJfxFg6QEmLjpdjRw==',
     'X-Requested-With': 'XMLHttpRequest'
 }
 
