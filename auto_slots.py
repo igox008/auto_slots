@@ -26,7 +26,7 @@ headers = {
     'Sec-Fetch-Mode': 'cors',
     'Sec-Fetch-Site': 'same-origin',
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-    'X-Csrf-Token': 'Ok+Wt+1ASiBskHa16b+QQqFfIoz/ZBK8sPFZkhm0P65J4gt8eWnJYYRc1tvd2L+os95l7WaQgp4Mku1oBuLqzA==',
+    'X-Csrf-Token': 'tq7XmgDI+3ndFnajmG6qzYNr2EnRmikB/t2AZZvb3p3FA0pRlOF4ODXa1s2sCYUnkeqfKEhuuSNCvjSfhI0L/w==',
     'X-Requested-With': 'XMLHttpRequest'
 }
 
