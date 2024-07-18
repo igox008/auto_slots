@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 import time
 import sys
 
+
 url = 'https://profile.intra.42.fr/slots.json'
 
 if len(sys.argv) != 2:
@@ -11,6 +12,8 @@ if len(sys.argv) != 2:
     sys.exit(1)
 
 session_cookie = sys.argv[1]
+
+
 headers = {
     'Accept': 'application/json, text/javascript, */*; q=0.01',
     'Accept-Encoding': 'gzip, deflate, br, zstd',
@@ -26,7 +29,7 @@ headers = {
     'Sec-Fetch-Mode': 'cors',
     'Sec-Fetch-Site': 'same-origin',
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-    'X-Csrf-Token': 'tq7XmgDI+3ndFnajmG6qzYNr2EnRmikB/t2AZZvb3p3FA0pRlOF4ODXa1s2sCYUnkeqfKEhuuSNCvjSfhI0L/w==',
+    'X-Csrf-Token': "k/QPgp7n5qVeNC9iVxWtCI5rijPLzQncd4sndbYJx3Ed0ZFAnN8nbs3MGh6zbghSh2NOohb8s6mq1uWDgdUAHA==" ,
     'X-Requested-With': 'XMLHttpRequest'
 }
 
