@@ -29,7 +29,7 @@ headers = {
     'Sec-Fetch-Mode': 'cors',
     'Sec-Fetch-Site': 'same-origin',
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-    'X-Csrf-Token': "k/QPgp7n5qVeNC9iVxWtCI5rijPLzQncd4sndbYJx3Ed0ZFAnN8nbs3MGh6zbghSh2NOohb8s6mq1uWDgdUAHA==" ,
+    'X-Csrf-Token': "4QmtUdC3yJF7GwpkwxpeJetPutClxsjIDMi+Kcrpn/oKNM1Enilu75L9I+0m8M9nxnOgLfnDL5qodfnWH908IQ==" ,
     'X-Requested-With': 'XMLHttpRequest'
 }
 
@@ -40,7 +40,7 @@ cookies = {
 begin_at = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
 
 while True:
-    end_at = (datetime.strptime(begin_at, '%Y-%m-%dT%H:%M:%S') + timedelta(hours=1, minutes=15)).strftime('%Y-%m-%dT%H:%M:%S')
+    end_at = (datetime.strptime(begin_at, '%Y-%m-%dT%H:%M:%S') + timedelta(minutes=45)).strftime('%Y-%m-%dT%H:%M:%S')
     data = {
         'slot[begin_at]': begin_at,
         'slot[end_at]': end_at,
