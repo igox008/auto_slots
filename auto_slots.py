@@ -29,7 +29,7 @@ headers = {
     'Sec-Fetch-Mode': 'cors',
     'Sec-Fetch-Site': 'same-origin',
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-    'X-Csrf-Token': "4QmtUdC3yJF7GwpkwxpeJetPutClxsjIDMi+Kcrpn/oKNM1Enilu75L9I+0m8M9nxnOgLfnDL5qodfnWH908IQ==" ,
+    'X-Csrf-Token': "x4+6W6f8iYDiocC6w1lTnZe/N19U3MkChkn9quFZON0IWMt2Bmz/VaMPWfWN9/aYe8hL0gsCxZgDDeS5jRx24Q==" ,
     'X-Requested-With': 'XMLHttpRequest'
 }
 
