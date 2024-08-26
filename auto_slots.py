@@ -3,9 +3,11 @@ from urllib.parse import unquote
 from datetime import datetime, timedelta
 import time
 import sys
+import re
 
 
 url = 'https://profile.intra.42.fr/slots.json'
+intra = 'https://profile.intra.42.fr/'
 
 if len(sys.argv) != 2:
     print("Usage: python script.py <session_cookie>")
@@ -13,6 +15,22 @@ if len(sys.argv) != 2:
 
 session_cookie = sys.argv[1]
 
+cookies = {
+    '_intra_42_session_production': session_cookie,
+}
+
+session = requests.session()
+
+session.cookies.update(cookies)
+resp = session.get(intra)
+
+resp_txt = resp.text
+
+csrf_pattern = re.compile(r'<meta\s+name="csrf-token"\s+content="([^"]+)"\s*/?>', re.IGNORECASE)
+match = csrf_pattern.search(resp_txt)
+csrf_token = ""
+if match:
+    csrf_token = match.group(1)
 
 headers = {
     'Accept': 'application/json, text/javascript, */*; q=0.01',
@@ -29,18 +47,39 @@ headers = {
     'Sec-Fetch-Mode': 'cors',
     'Sec-Fetch-Site': 'same-origin',
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-    'X-Csrf-Token': "x4+6W6f8iYDiocC6w1lTnZe/N19U3MkChkn9quFZON0IWMt2Bmz/VaMPWfWN9/aYe8hL0gsCxZgDDeS5jRx24Q==" ,
+    'X-Csrf-Token': csrf_token ,
     'X-Requested-With': 'XMLHttpRequest'
-}
-
-cookies = {
-    '_intra_42_session_production': session_cookie,
 }
 
 begin_at = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
 
-while True:
-    end_at = (datetime.strptime(begin_at, '%Y-%m-%dT%H:%M:%S') + timedelta(minutes=45)).strftime('%Y-%m-%dT%H:%M:%S')
+n = 0
+while n == 0:
+    try:
+        slot_time = int(input("enter how much time you want in each slot in minutes : "))
+        if slot_time >= 30 :
+            n = 1
+        else :
+            print("slot_time must be greater or equal to 30\n")
+    except ValueError :
+        n = 0
+        print("That's not a valid number!")
+n = 0
+while n == 0 :
+    try : 
+        slots_number = int(input("enter how many slots you want : "))
+        if slots_number > 0 :
+            n = 1
+        else :
+            print("slot_time must be greater than 0\n")
+    except ValueError :
+        n = 0
+        print("That's not a valid number!")
+slot_hours = int(slot_time / 60)
+slot_time = int(slot_time % 60)
+i = 0
+while i < slots_number :
+    end_at = (datetime.strptime(begin_at, '%Y-%m-%dT%H:%M:%S') + timedelta(hours=slot_hours, minutes=slot_time)).strftime('%Y-%m-%dT%H:%M:%S')
     data = {
         'slot[begin_at]': begin_at,
         'slot[end_at]': end_at,
@@ -49,6 +88,7 @@ while True:
 
     response = requests.post(url, headers=headers, cookies=cookies, data=data)
 
+    print(response.json)
     if 'Ending must be before' in response.json()['message']:
         print('Stopping script...')
         break
@@ -57,4 +97,5 @@ while True:
     print(f"from '{begin_at}' to '{end_at}': {message}")
 
     begin_at = (datetime.strptime(end_at, '%Y-%m-%dT%H:%M:%S') + timedelta(minutes=15)).strftime('%Y-%m-%dT%H:%M:%S')
+    i += 1
 
