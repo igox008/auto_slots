@@ -51,16 +51,31 @@ headers = {
     'X-Requested-With': 'XMLHttpRequest'
 }
 
-begin_at = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
+now = datetime.now()
+
+minute = now.minute
+remainder = minute % 15
+if remainder == 0:
+    rounded_minutes = minute
+else:
+    rounded_minutes = minute - remainder + 15
+
+rounded_time = now.replace(minute=rounded_minutes, second=0, microsecond=0)
+
+if rounded_minutes == 60:
+    rounded_time += timedelta(hours=1)
+    rounded_time = rounded_time.replace(minute=0)
+
+begin_at = rounded_time.strftime('%Y-%m-%dT%H:%M:%S')
 
 n = 0
 while n == 0:
     try:
         slot_time = int(input("enter how much time you want in each slot in minutes : "))
-        if slot_time >= 30 :
+        if slot_time >= 30 and slot_time <= 360 and slot_time % 15 == 0:
             n = 1
         else :
-            print("slot_time must be greater or equal to 30\n")
+            print("slot_time must be between 30 and 360, and must be a multiple of 15.")
     except ValueError :
         n = 0
         print("That's not a valid number!")
@@ -71,7 +86,7 @@ while n == 0 :
         if slots_number > 0 :
             n = 1
         else :
-            print("slot_time must be greater than 0\n")
+            print("slot_time must be greater than 0")
     except ValueError :
         n = 0
         print("That's not a valid number!")
@@ -88,14 +103,17 @@ while i < slots_number :
 
     response = requests.post(url, headers=headers, cookies=cookies, data=data)
 
-    print(response.json)
     if 'Ending must be before' in response.json()['message']:
         print('Stopping script...')
         break
 
     message = response.json()['message']
-    print(f"from '{begin_at}' to '{end_at}': {message}")
+    if message == "Slot has been created" :
+        print(f"from '{begin_at}' to '{end_at}': {message}")
 
-    begin_at = (datetime.strptime(end_at, '%Y-%m-%dT%H:%M:%S') + timedelta(minutes=15)).strftime('%Y-%m-%dT%H:%M:%S')
-    i += 1
+    if message != "Slot has been created" :
+        begin_at = (datetime.strptime(begin_at, '%Y-%m-%dT%H:%M:%S') + timedelta(minutes=15)).strftime('%Y-%m-%dT%H:%M:%S')
+    else :
+        begin_at = (datetime.strptime(end_at, '%Y-%m-%dT%H:%M:%S') + timedelta(minutes=15)).strftime('%Y-%m-%dT%H:%M:%S')
+        i += 1
 
