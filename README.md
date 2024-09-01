@@ -6,9 +6,19 @@ This repository contains a Python script and a bash script to automate the proce
 
 - `auto_slots.py`: A Python script that uses the requests library to interact with the 42 Intra platform's API to book slots.
 - `delete_slots.py`: A Python script that uses the requests library to interact with the 42 Intra platform's API to delete slots.
+- `session_id.py`: A Python script that uses selenium to get your _intra_42_session_production easily
 - `run.sh`: A bash script that sets up a virtual environment, installs the necessary dependencies, and runs the Python script.
 
-## how to get your _intra_42_session_production
+## how to get your _intra_42_session_production easily
+
+run :
+```bash
+./run.sh get_sess
+```
+
+it'll prompt you to enter your login and password in the temrminal, you'll wait some seconds and TADAAAA you have your `_intra_42_session_production`
+
+## how to get your _intra_42_session_production manually
 
 go to the your intra home page, right click and click inspect element
 
@@ -34,6 +44,10 @@ To use the bash script, you need to provide your 42 Intra session cookie as a co
 
 ```bash
 ./run.sh <take or delete> <your _intra_42_session_production>
+```
+or if you wanna get your _intra_42_session_productio
+```bash
+./run.sh get_sess
 ```
 
 The script will then set up a virtual environment, install the requests library, and run the Python script with the provided session cookie.

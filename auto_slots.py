@@ -72,7 +72,7 @@ n = 0
 while n == 0:
     try:
         slot_time = int(input("enter how much time you want in each slot in minutes : "))
-        if slot_time >= 30 and slot_time <= 360 and slot_time % 15 == 0:
+        if slot_time >= 30 and slot_time <= 360 and slot_time % 15 == 0 :
             n = 1
         else :
             print("slot_time must be between 30 and 360, and must be a multiple of 15.")
