@@ -60,6 +60,9 @@ if remainder == 0:
 else:
     rounded_minutes = minute - remainder + 15
 
+if rounded_minutes < 0 or rounded_minutes > 59:
+    rounded_minutes = 0
+
 rounded_time = now.replace(minute=rounded_minutes, second=0, microsecond=0)
 
 if rounded_minutes == 60:

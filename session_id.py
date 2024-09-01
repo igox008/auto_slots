@@ -9,7 +9,7 @@ import os
 
 
 login = input("Enter your login : ")
-password = getpass.getpass(prompt='Enter your password: ')
+password = getpass.getpass(prompt='Enter your password : ')
 
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
@@ -34,7 +34,7 @@ try:
         cookie_value = cookie['value']
         print(f'Your "{cookie_name}" is: {cookie_value}')
     else:
-        print(f'"{cookie_name}" not found.')
+        print(f'"{cookie_name}" not found or login/password is incorrect.')
     file_path = 'cookies.json'
     if os.path.exists(file_path):
         os.remove(file_path)
